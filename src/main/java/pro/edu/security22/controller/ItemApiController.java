@@ -8,9 +8,7 @@ package pro.edu.security22.controller;
 */
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pro.edu.security22.model.Item;
 import pro.edu.security22.service.ItemServiceImpl;
 
@@ -23,9 +21,27 @@ public class ItemApiController {
     @Autowired
     ItemServiceImpl service;
 
-    @GetMapping
+    @GetMapping("/")
     List<Item> getAll(){
         return service.getAll();
     }
+
+    @GetMapping("/{id}")
+    Item getOne(@PathVariable String id){
+        return service.getOne(id);
+    }
+
+    @DeleteMapping("/{id}")
+    boolean deleteOne(@PathVariable String id){
+        return service.deleteOne(id);
+    }
+
+    @PostMapping("/")
+    Item insertOne(@RequestBody Item item){
+        return service.addOne(item);
+    }
+
+
+
 
 }
